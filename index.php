@@ -11,8 +11,6 @@
 
 include "global.php";
 
-$title = "cake";
-
 /*
  * Load index page
  */
