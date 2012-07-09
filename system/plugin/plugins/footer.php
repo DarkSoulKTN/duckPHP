@@ -7,6 +7,11 @@ class footer implements quackPlugin
         return "Footer";
     }
     
+    public function enable()
+    {
+        echo "<!-- Enabling plugin: " . $this->name() . " -->\n";
+    }
+    
     public function output()
     {
         return "<i>QuackPlugin</i> made by Quackster";

@@ -52,6 +52,7 @@ class PluginManager
             * Create new instance and register it!
             */
            $plugin = new $className;
+           $plugin->enable();
            
            /*
             * Add to array
