@@ -10,6 +10,7 @@ include "system/plugin/PluginRegistry.php";
 
 $pluginRegistry = new PluginRegistry();
 $pluginRegistry->registerPlugin("footer.php", "footer");
+$pluginRegistry->registerPlugin("mysql.php", "mysql");
 
 /*###################################################*/
 //                  Plugin loading

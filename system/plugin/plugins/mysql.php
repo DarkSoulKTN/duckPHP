@@ -9,17 +9,23 @@
  * @link       http://github.com/Quackster/duckPHP
  */
 
-class footer implements quackPlugin
-{
+class mysql implements quackPlugin
+{    
     public function onEnable()
     {
-        echo "<!-- Enabling plugin: " . $this->name() . " -->\n";
+		$this->onMySQL();
     }
     
     public function onEcho()
     {
-        return "<i>QuackPlugin</i> made by Quackster";
+        return "<!-- MySQL Output -->";
     }
+	
+	public function onMySQL()
+	{
+		mysql_connect("localhost", "root", "");
+		mysql_select_db("");
+	}
 }
 
 ?>

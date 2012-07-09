@@ -1,11 +1,25 @@
 <?php
 
+/**
+ * duckPHP
+ *
+ * @author     Quackster <quacky@winterpartys.org>
+ * @copyright  2012 - (and beyond) Quackster.NET
+ * @license    http://philsturgeon.co.uk/code/dbad-license/  Don't Be A Dick 1.0
+ * @link       http://github.com/Quackster/duckPHP
+ */
+
 class Template
 {
     /*
      * Template theme
      */
     public $theme;
+	
+	/*
+     * Template theme
+     */
+    public $page;
 
     /*
      * Templates content
@@ -42,20 +56,20 @@ class Template
     /*
      * Load content and init variables
      */
-    public function load($page)
+    public function page($page)
     {
-        /*
-         * Grab content for page
+		/*
+         * Set page
          */
-        $this->content = file_get_contents("system/template/" . $this->theme . "/" . $page . ".html");
+        $this->page = $page;
     }
 
     /*
      * Set a tag 
      */
-    public function set($key, $variable)
+    public function param($key, $variable)
     {
-        $this->content = str_replace("[" . $key . "]", $variable, $this->content);
+		$this->vars["[" . $key . "]"] = $variable;
     }
     
     /*
@@ -73,14 +87,45 @@ class Template
         /*
          * Replace with output
          */
-        $this->content = str_replace("[Plugin:" . $className . "]", $plugin->output(), $this->content);
+		$this->vars["[Plugin:" . $className . "]"] = $plugin->onEcho();
     }
     
     /*
      * Output function
      */
     public function display()
-    {
+    {		 
+		/*
+		 * Start PHP buffer
+		 */
+		ob_start();
+		 
+		/*
+         * Grab content for page
+         */
+		include "system/template/" . $this->theme . "/" . $this->page . ".html";
+		
+		/*
+         * Get content from buffer
+         */
+        $this->content = ob_get_contents();
+		
+		/*
+         * Filter params
+         */
+		foreach ($this->vars as $key => $value)
+        {
+			$this->content = str_replace($key, $value, $this->content);
+		}
+		
+		/*
+		 * Clean buffer
+		 */
+		ob_end_clean();
+		
+		/*
+		 * Echo out the content
+		 */
         echo $this->content;
     }
 }
