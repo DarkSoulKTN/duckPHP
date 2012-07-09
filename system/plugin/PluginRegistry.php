@@ -25,11 +25,24 @@ class PluginRegistry
     }
     
     /*
-     * Register all plugins and their class names
+     * Register a single plugin
      */
     public function registerPlugin($fileName, $className)
     {
         $this->plugins[$fileName] = $className;
+    }
+    
+    /*
+     * Register all plugins and their class names
+     */
+    public function registerPlugins()
+    {
+        foreach ($this->getDirectoryList("system/plugin/plugins/") as $fileName)
+        {
+            $className = str_replace(".php", "", $fileName);
+            
+            $this->registerPlugin($fileName, $className);
+        }
     }
     
     /*
@@ -53,5 +66,27 @@ class PluginRegistry
         {
             return null;
         }
+    }
+    
+    /*
+     * @source: http://www.laughing-buddha.net/php/dirlist/
+     */
+    function getDirectoryList ($directory) 
+    {
+        $results = array();
+
+        $handler = opendir($directory);
+
+        while ($file = readdir($handler))
+        {
+            if ($file != "." && $file != "..")
+            {
+                $results[] = $file;
+            }
+        }
+        closedir($handler);
+
+        return $results;
+
     }
 }

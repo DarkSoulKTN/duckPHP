@@ -13,11 +13,16 @@ class footer implements quackPlugin
 {
     public function onEnable()
     {
-        echo "<!-- Enabling plugin: " . $this->name() . " -->\n";
+        /*
+         * Nothing to be enabled
+         */
     }
     
     public function onEcho()
     {
+        /*
+         * Returns HTML code of the footer/
+         */
         return "<i>QuackPlugin</i> made by Quackster";
     }
 }

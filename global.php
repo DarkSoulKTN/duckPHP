@@ -9,8 +9,7 @@ include "system/plugin/Plugin.php";
 include "system/plugin/PluginRegistry.php";
 
 $pluginRegistry = new PluginRegistry();
-$pluginRegistry->registerPlugin("footer.php", "footer");
-$pluginRegistry->registerPlugin("mysql.php", "mysql");
+$pluginRegistry->registerPlugins();
 
 /*###################################################*/
 //                  Plugin loading

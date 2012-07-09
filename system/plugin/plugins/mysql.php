@@ -13,16 +13,25 @@ class mysql implements quackPlugin
 {    
     public function onEnable()
     {
+        /*
+         * Call connect to MySQL database function
+         */
 		$this->onMySQL();
     }
     
     public function onEcho()
-    {
-        return "<!-- MySQL Output -->";
+    {   
+        /*
+         * Nothing to be returned.
+         */
+        return "";
     }
 	
 	public function onMySQL()
 	{
+        /*
+         * Connect to MySQL database
+         */
 		mysql_connect("localhost", "root", "");
 		mysql_select_db("");
 	}
