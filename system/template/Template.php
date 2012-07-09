@@ -17,7 +17,7 @@ class Template
     public $theme;
 	
 	/*
-     * Template theme
+     * Template page
      */
     public $page;
 
